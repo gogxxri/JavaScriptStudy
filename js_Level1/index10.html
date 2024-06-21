@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Hello, world!</title>
+    <link href="main2.css" rel="stylesheet">
+  </head>
+  <body>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+   
+
+    <div class="black-bg">
+        <div class="white-bg">
+          <h4>로그인하세요</h4>
+
+            <form action="success.html">
+                <div class="my-3">
+                <input type="text" class="form-control" id="firstInput">
+                </div>
+                <div class="my-3">
+                <input type="password" class="form-control" id="secondInput">
+                </div>
+                <button type="submit" class="btn btn-primary" id="send">전송</button>
+                <button type="button" class="btn btn-danger" id="close">닫기</button>
+            </form> 
+
+        </div>
+    </div> 
+
+    <script>
+
+        $('form').on('submit', function(e){
+            if (document.getElementById('firstInput').value == ''){
+                alert("아이디를 입력하세요.")
+                e.preventDefault(); // 폼 전송 막음
+            } else if (document.getElementById('secondInput').value == ''){
+                alert("비밀번호를 입력하세요.")
+                e.preventDefault();
+            } else if (document.getElementById('secondInput').value.length < 6){
+                alert("비밀번호는 6자리 이상 입력하세요.")
+                e.preventDefault();
+            } 
+        });
+
+        document.getElementById('firstInput').addEventListener('input', function(){
+            console.log('한 글자 추가마다')
+        });
+
+        document.getElementById('firstInput').addEventListener('change', function(){
+            console.log('커서 옮겼을때')
+        });
+        
+    </script>
+
+    
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <span class="navbar-brand">Navbar</span>
+          <button  class="navbar-toggler" type="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </nav> 
+      
+      <ul class="list-group">
+        <li class="list-group-item">An item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+        <li class="list-group-item">A fourth item</li>
+        <li class="list-group-item">And a fifth one</li>
+      </ul>
+
+      <div class="main-bg">
+        <h4>Shirts on Sale</h4> 
+        <button  class="btn btn-danger" type="button" id="login">로그인</button>
+      </div>
+      <script>
+
+        $('#login').on('click', function(){
+          $('.black-bg').addClass('show-modal');
+        });
+
+
+        $('#close').on('click', function(){
+            $('.black-bg').removeClass('show-modal');
+        });
+
+        document.querySelector('.navbar-toggler').addEventListener('click', function(){
+            document.querySelectorAll('.list-group')[0].classList.toggle('show');
+        });
+      </script>
+
+      
+
+  </body>
+</html>

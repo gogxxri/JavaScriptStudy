@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main2.css">
+</head>
+<body>
+    <div class="alert-box" id="alert">
+        <p id="title">알림창 </p>
+        <button id="close">❌</button>
+    </div>
+    <button onclick="popAlert('block', '아이디를 입력하세요.');">버튼1</button>
+    <button onclick="popAlert('block', '비밀번호를 입력하세요.');">버튼2</button>
+
+    <script>
+
+        document.getElementsByName('close').addEventListener('click', function(){
+                document.getElementById('alter').style.display = 'none';
+            });
+
+
+        function popAlert(closeOpen, title) {
+            document.getElementById('alert').style.display = closeOpen;
+            document.getElementById('title').innerHTML = title;
+        }
+    </script>
+</body>
+</html>
