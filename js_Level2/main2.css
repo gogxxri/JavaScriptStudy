@@ -46,3 +46,17 @@
     background: black;
     color : white;
 }
+
+.slide-container{
+    width : 300vw;
+    /*margin-left:-100vw; 왼쪽으로 박스 이동*/
+    transition: all 1s; /* 1초 동안 모든 속성에 대해 부드럽게 전환 */
+    overflow : hidden;
+}
+.slide-box{
+    width:100vw;
+    float : left; /*왼쪽으로 박스 배치*/
+}
+.slide-box img{
+    width:100%;
+}
