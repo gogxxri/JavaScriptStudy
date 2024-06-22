@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function hello(){
+        console.log('안녕'); // 실행
+        return 123 // 함수 종료
+        console.log('반가워'); // 실행 안됨
+      }
+      
+        var a = hello();
+        console.log(a); // 123출력
+    </script>
+
+    <script>
+        // 부가세 계산기 만들기
+        function vat(a){
+            return a * 0.1;
+        }
+
+        console.log(vat(5000));
+        console.log(vat(7000));
+    </script>
+
+    <script>
+        function ms(min, sec){
+            var result = ((min*60) + sec)*1000;
+            return result;
+        }
+        console.log(ms(1, 30));
+        console.log(ms(2, 10));
+    </script>
+
+    <script>
+        function sale(price , first){
+
+            var salePrice = price * 0.9;
+
+            if(first === true){
+                return parseFloat((salePrice - 1.5).toFixed(2));
+            } 
+            return parseFloat(salePrice.toFixed(2));
+        }
+        console.log(sale(70, false));   // 63
+        console.log(sale(10, true));    // 7.5
+    </script>
+
+
+</body>
+</html>

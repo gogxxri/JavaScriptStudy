@@ -1,3 +1,20 @@
+:root {
+    scroll-behavior: auto; /*부트스트랩으로 인해 스크롤바가 부드럽게 이동할 때, 그 속성을 제거함*/
+}
+
+.scroll-box {
+    width: 100vw;
+    height: 8px;
+    background: #f3f3f3;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.scroll-state {
+    width: 0;
+    height: 100%;
+    background-color: gray;
+}
 .alert-box{
     background-color: skyblue;
     padding:20px;
@@ -8,6 +25,17 @@
 
 .list-group{
     display : none;
+}
+
+.navbar{
+    position : fixed; /*고정*/
+    width : 100%;
+    z-index : 5;
+}
+
+.navbar-brand{
+    font-size:30px;
+    transition: all 1s;
 }
 
 .show {

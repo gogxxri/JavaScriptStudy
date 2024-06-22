@@ -32,7 +32,6 @@
     </div> 
 
     <script>
-
         $('form').on('submit', function(e){
 
             var userInputId = document.getElementById('firstInput').value;
@@ -66,33 +65,35 @@
         });
         
     </script>
-
-    <div class="alert alert-danger">
-        5초 이내 구매 시 사은품 증정
-    </div>
-
-    <script>
-    var sec = 4;
-    setInterval(function(){
-        if(sec>0){
-            $('.alert').html(`${sec--}초 이내 구매 시 사은품 증정`);
-        } else {
-            $('.alert').hide();
-        }
-    }, 1000);
-    
-    </script>
-
     
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <span class="navbar-brand">Navbar</span>
           <span class="badge bg-dark text-light">Dark 🔄</span>
           <button  class="navbar-toggler" type="button">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-      </nav> 
+        <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    </nav> 
+
+    <script>
+        window.addEventListener('scroll', function(){
+            // window.scrollY;
+            //console.log(window.scrollY); // 위에서부터 얼마나 스크롤 했는지
+           // window.scrollTo(0, 100); // 강제 스크롤
+           //window.scrollBy(0, 100); // 현재 위치에서 100 만큼 스크롤 내림
+           if(window.scrollY > 100){
+                document.querySelector('.navbar-brand').style.fontSize= '15px';
+           } else {
+                 document.querySelector('.navbar-brand').style.fontSize= '30px';
+           }
+        });   
+        
+        $(window).on('scroll', function(){
+           // $(window).scrollTop(100); // scrollY랑 같음, 위에서 아래로 100만큼 스크롤
+            // console.log($(window).scrollTop());
+        });
+    </script>
       
     <script>
     var cnt =0;
@@ -109,8 +110,8 @@
         }
         cnt++;
     });
-    </script>
 
+    </script>
       <ul class="list-group">
         <li class="list-group-item">An item</li>
         <li class="list-group-item">A second item</li>
@@ -118,6 +119,8 @@
         <li class="list-group-item">A fourth item</li>
         <li class="list-group-item">And a fifth one</li>
       </ul>
+
+    </script>
 
       <div class="main-bg">
         <h4>Shirts on Sale</h4> 
@@ -141,6 +144,40 @@
             });
         </script>
 
+        <!--회원 약관-->
+        <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+            Quae voluptas voluptatum minus praesentium fugit debitis at, 
+            laborum ipsa itaque placeat sit, excepturi eius. 
+            Nostrum perspiciatis,
+            eligendi quae consectetur praesentium exercitationem.
+        </div> 
+
+        <script>
+             var alertShown = false; // 플래그 태그 변수
+            // div의 스크롤바를 다 내리면 alert
+            document.querySelector('.lorem').addEventListener('scroll', function(){
+                var scrollRow = document.querySelector('.lorem').scrollTop; // 일반 div 박스의 경우 scrollY 불가
+                var scrollHeight = document.querySelector('.lorem').scrollHeight; // div의 실제 스크롤 높이
+                var seeHeight = document.querySelector('.lorem').clientHeight;
+                //console.log(scrollRow); // div의 스크롤 내린 양
+                //console.log(scrollHeight); // 실제 스크롤바의 높이
+                //console.log(seeHeight); // 화면에 보이는 div박스의 높이
+
+                // div의 스크롤바 내린 양 + 눈에보이는 div박스 width == div의 실제 높이
+
+                if(scrollRow + seeHeight > scrollHeight - 10){ // 오차
+                    if(!alertShown){
+                        alert("회원 약관을 모두 읽으셨습니다.")
+                        alertShown = true; // 플래그 태그를 true로 설정해 다시 알림 표시하지 않음
+                    }
+                }
+            });
+            document.querySelector('html').scrollHeight; // 현재 페이지 끝까지 스크롤 체크
+            document.querySelector('html').clientHeight; // 현재 페이지 보이는 부분의 높이
+            document.querySelector('html').scrollTop;    // 현재페이지 스크롤 양
+            // window.scrollY (위의 scrollTop과 같음)
+        </script>
 
         <div class="slide-container">
             <div class="slide-box">
@@ -187,5 +224,8 @@
                 $('.slide-container').css('transform', 'translateX(0vw)');
             });
         </script>
+
+
+        <div style="height:1000px"></div> <!--스크롤바 생성 위해 만듦-->
   </body>
 </html>
