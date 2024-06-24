@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1번 : Array에서 철수라는 자료를 찾기
+        var 출석부 = ['흥민', '흥민', '영희', '철수', '재석'];
+        
+        function find(name) {
+            var found = false;
+            출석부.forEach(function(nameList){
+                if(name === nameList){
+                    found = true;
+                } 
+            });
+
+            if(found){
+                console.log("있음");
+            } else {
+                console.log("없음");
+            }
+        } 
+
+        find("흥민");   // 있음
+        find("메롱");   // 없음
+    </script>
+
+    <script>
+        // 1번 다른 방법
+        var 출석부 = ['흥민', '흥민', '영희', '철수', '재석'];
+
+        function find(name){
+            for(let i=0; i<출석부.length; i++){
+                if(name == 출석부[i]){
+                    console.log("있음");
+                    return;
+                } 
+            } console.log("없음");
+        }
+        find("흥민");   // 있음
+        find("메롱");   // 없음
+    </script>
+
+    <script>
+        // 2번 문제 : 구구단 출력
+        for(let i=2; i<=9; i++){
+            for(let j=1; j<9; j++){
+                console.log(`${i} * ${j} = ${i*j}`);
+            }
+        }
+    </script>
+
+    <script>
+        // 3번 문제 : 평균점수 계산기
+        /*
+        기존 모의고사 성적들을 array 자료에 전부 담아 첫 파라미터로 입력하고 
+        이번 11월 모의고사 성적을 둘 째 파라미터로 입력하면  
+        11월 성적이 기존 성적들의 평균에 비해 얼마나 우수한지 결과
+        */
+
+        function 계산기 (array, b) {
+            var total = 0;
+            var avg;
+            for(let i=0; i<array.length; i++){
+                total += array[i];
+            }
+            avg = total/array.length;
+
+            if (avg < b){
+                console.log(`지난 평균점수보다 ${b-avg}점 올랐습니다`);
+            } else {
+                console.log(`지난 평균점수보다 ${avg-b}점 떨어졌습니다`)
+            }
+        }
+
+        계산기 ([10, 20, 30, 40, 50], 40);
+        계산기 ([40, 40, 40], 20);
+    </script>
+</body>
+</html>

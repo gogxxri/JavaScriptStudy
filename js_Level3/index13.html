@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Hello, world!</title>
+    <link href="main3.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</head>
+  <body>   
+    <div class="container">
+        <div class="row">
+            <!--
+            <div class="col-sm-4">
+              <img src="https://via.placeholder.com/600" class="w-100">
+              <h5>Card title</h5>
+              <p>가격 : 70000</p>
+            </div>
+            -->
+        </div>
+    </div> 
+
+    <div class="container">
+        <button class="btn btn-danger" id="newProdcuts" style="margin-top:10px">더보기</button>
+    </div>
+
+    <div class="container my-3">
+        <div class="input-group mb-3">
+            <input type="text" id="titleSearch" class="form-control" placeholder="제품명 검색" style="width: 20%;">
+            <button class="btn btn-primary" id="search" style="margin-right:10px">검색</button>
+            <input type="number" id="priceInput" class="form-control" placeholder="가격 입력" style="width: 20%;">
+            <button class="btn btn-primary" id="filterPrice">가격으로 필터</button>
+        </div>
+    </div>
+    </div>
+    <div class="container my-3">
+        <button class="btn btn-primary" id="price">
+            가격 순 정렬
+        </button>
+        <button class="btn btn-primary" id="sort1">가나다 순 정렬</button>
+        <button class="btn btn-primary" id="sort2">다나가 순 정렬</button>
+        <button class="btn btn-danger" id="filter">6만원이하</button>
+        <button class="btn btn-danger" id="map">원 → 달러</button>
+        <button class="btn btn-primary" id="reset">원래 순서로</button>
+    </div>
+
+      
+    <script>
+        var products = [
+          { id : 0, price : 70000, title : 'Blossom Dress' },
+          { id : 1, price : 50000, title : 'Springfield Shirt' },
+          { id : 2, price : 60000, title : 'Black Monastery' }
+        ];
+
+        // 초기 제품을 포함하는 모든 제품 목록
+        var allProducts = [...products];
+
+        // 카드 생성
+        function createCard(item, i){
+            return `<div class="col-sm-4">
+                        <img src="https://via.placeholder.com/600" class="w-100">
+                       <h5>${item.title}</h5>
+                        <p>가격 : ${item.price}</p>
+                        <button class="buy" data-id="${i}">구매</button>
+                    </div>`;
+        }
+        // <button class="buy" data-id="${i}">구매</button>는 javascript로 동적으로 생성됨
+         // ->  이벤트 위임을 사용한 구매 버튼 클릭 이벤트
+         // 1번 풀이 ! (2번풀이는 index14.html에)
+         $(document).on('click', '.buy', function(e){
+            var productId = e.target.dataset.id;
+            var cartProduct = allProducts[productId];
+
+            if(localStorage.getItem('cart') == null){
+                let cart = [cartProduct.title];
+                var cartList = JSON.stringify(cart);
+                localStorage.setItem('cart', cartList);
+            } else {
+                var cartList = JSON.parse(localStorage.getItem('cart'));
+                cartList.push(cartProduct.title);
+                localStorage.setItem('cart', JSON.stringify(cartList));
+            }
+        }); 
+
+
+        /*
+        localStorage.setItem('이름', 'kim'); // 저장
+        localStorage.getItem('이름');       // 불러오기
+        console.log(localStorage.getItem('이름'));
+        localStorage.removeItem('이름');    // 삭제
+        console.log(localStorage.getItem('이름'));
+
+        // Array나 Object도 저장 가능 but 깨질 수 있음
+        localStorage.setItem('number', '1, 2, 3');
+        
+        // JSON으로 변환하면 문자취급을 받기 때문에 안전하게 로컬스토리지에 저장
+        var arr = [1,2,3];
+        var newArr = JSON.stringify(arr); // JSON으로 변환, JSON.stringify(여기에 문자화 하고싶은 배열)
+        localStorage.setItem('num', newArr);
+
+        //로컬 스토리지에서 꺼내기
+        var no = localStorage.getItem('num');
+        console.log(no); // "[1, 2, 3]"
+        no = JSON.parse(no); //JSON을 array나 object로 변환
+        console.log(no); // [1, 2, 3]
+        console.log(no[1]); // 2
+
+        // 로컬 스토리지 데이터 수정
+        // 1. 자료 꺼내고 2. 꺼낸거 수정 3. 다시 넣기
+        var newNo = [1, 2, 3, 4];
+        no = JSON.stringify(newNo);
+        localStorage.setItem('num', newNo);
+        */
+
+        // 제품 표시
+        function showProducts(products) {
+            $('.row').html('');
+            products.forEach((item, i) => {
+                var card = createCard(item, i);
+                $('.row').append(card);
+            });
+        }
+
+        // 초기 제품 표시
+        showProducts(products);
+
+        // 더보기 버튼 이벤트 핸들러
+        $('#newProdcuts').click(function(){   
+            var cnt = $(this).data('cnt') || 1;       
+            
+            if(cnt == 1){
+                $.get('https://codingapple1.github.io/js/more1.json')
+                .done((data) => {
+                    console.log(data);
+                    allProducts = allProducts.concat(data);
+                    showProducts(allProducts);
+                    $('#newProdcuts').data('cnt', 2);
+                    
+                }).fail(function(){
+                    console.log(error);
+                });
+
+            } else if (cnt == 2){
+                $.get('https://codingapple1.github.io/js/more2.json')
+                    .done((data)=>{
+                        console.log(data);
+                        allProducts = allProducts.concat(data);
+                        showProducts(allProducts);
+                        $('#newProdcuts').hide();
+                }).fail(function(){
+                    console.log(error);
+                });
+            } 
+        });
+
+        // 가격 순 정렬 버튼 이벤트 핸들러
+        $('#price').on('click', function(){
+            allProducts.sort(function(a, b){
+                return a.price - b.price;
+            });
+            console.log(allProducts);
+            showProducts(allProducts);
+
+        });
+
+        // 가나다 순 정렬버튼 
+        $('#sort1').on('click', function(){
+            allProducts.sort((a, b) => {
+                return a.title > b.title ? 1: -1;
+            });
+            console.log(allProducts);
+            showProducts(allProducts);
+        });
+
+        // 다나가 순 정렬버튼 
+        $('#sort2').click(function(){
+            allProducts.sort((a, b) => {
+                return a.title < b.title ? 1: -1;
+            });
+            showProducts(allProducts);
+        });
+
+        // filter
+        var arr = [7, 3,2, 5, 40];
+        var filterArr = arr.filter(function(item) {
+            return item <= 5;
+        });
+        console.log(filterArr);
+        
+
+        // 6만원 이하2
+        $('#filter').click(() => {
+            var sixUnder = allProducts.filter((item) => item.price <= 60000);
+            showProducts(sixUnder);
+        });
+
+        // map
+        var arr = [7, 3,2, 5, 40];
+        var mapArr = arr.map((item) => {
+            return item * 5;
+        });
+        console.log(mapArr);
+
+        // 원 -> 달러
+        $('#map').click(() => {
+            var toDollar = allProducts.map((item) => {
+                return { ...item, price: `$${(item.price / 1200).toFixed(2)}` };
+            });
+            console.log(toDollar);
+            showProducts(toDollar);
+        });
+
+        //제품명 검색
+        $('#search').click(()=>{
+            var searchTitle = $('#titleSearch').val().trim();
+            
+            if(searchTitle === ''){
+                alert('검색어를 입력하세요.');
+                return;
+            }
+            var searchResult = allProducts.filter((item)=>{
+                return item.title.toLowerCase().includes(searchTitle.toLowerCase());
+            })
+            showProducts(searchResult);
+        });
+
+        // 원래 순서로
+        $('#reset').click(function(){
+            allProducts = [...products]; // 초기 데이터로
+            showProducts(allProducts);
+        });
+
+        // 가격으로 검색
+        $('#filterPrice').click(() => {
+            var priceInput = $('#priceInput').val().trim();
+            if(price === '' ){
+                alert("가격을 입력하세요");
+                return;
+            }
+            var filterPriceProduct = allProducts.filter((item) => {
+                return item.price <= parseInt(priceInput);
+            })
+            showProducts(filterPriceProduct);
+        })
+
+    </script>
+
+</body>
+</html>
