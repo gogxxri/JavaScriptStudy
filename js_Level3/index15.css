@@ -1,0 +1,18 @@
+.grey {
+    background : lightgrey;
+    height : 2000px;
+    margin-top : 500px;
+}
+
+.image {
+    float : right;
+    width : 40vw;
+    position : sticky; /*div박스의 스크롤이 끝나면 해제됨*/ /*(fixed와 유사)*/
+    top : 100px; /*상단 어디에 고정되는지*/
+}
+
+.text {
+    float : left;
+    width : 50vw;
+}
+

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="index16.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div class="card-background">
+        <div class="card-box">
+            <img src="laptop (2).jpeg">
+        </div>
+        <div class="card-box">
+            <img src="laptop (3).jpeg">
+        </div>
+        <div class="card-box">
+            <img src="laptop (4).jpeg">
+        </div>
+    </div>
+
+    <script>
+        $(window).scroll(function(){ // 스크롤 될때마다 실행, window는 뷰포트 의미
+            var scrollHeight = $(window).scrollTop(); // 현재 스크롤 바 높이
+            console.log(scrollHeight);
+
+            var y = (-1/350) * scrollHeight  + (23/7);
+            /*
+            var y = a * 높이 + b
+            1 = a * 800 + b ;
+            0 = a * 1150 + b ;
+            800a = b-1
+            1150a = b
+            - 350a = -1 
+            a = -1 / 350
+            b = 23/7
+            */
+
+            var z = (- 1/3500) * scrollHeight  + (43/35);
+            /*
+            1 = a * 800 + b;
+            (9 / 10) = a * 1150 + b
+            1 / 10 = - 350a
+            a = - 1/3500
+            b = 43/35
+            */
+            
+            // 800~ 1150까지 스크롤바를 내리면
+            // 첫째 카드의 opacity를 1- 0으로 서서히 변경
+            $('.card-box').eq(0).css('opacity', y); // 미지의 변수 y를 넣어 사용 가능
+
+
+            // 800~ 1150까지 스크롤바를 내리면
+            // 카드의 크기가 1에서 0.9로 작아지도록        
+            $('.card-box').eq(0).css('transform', `scale( ${z} )`); // transform : scale(z)
+            $('.card-box').eq(0).css(' transition', 'all 0.2s'); 
+        }); 
+    </script>
+</body>
+</html>

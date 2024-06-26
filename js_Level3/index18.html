@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캐러셀 응용</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <style>
+    .slide-container{
+        width : 300vw;
+        /*margin-left:-100vw; 왼쪽으로 박스 이동*/
+        overflow: hidden;
+    }
+    .slide-box{
+        width:100vw;
+        float : left; /*왼쪽으로 박스 배치*/
+    }
+    .slide-box img{
+        width:100%;
+    }
+    </style>
+
+        <div style="overflow: hidden">
+            <div class="slide-container">
+                <div class="slide-box">
+                    <img src="laptop (2).jpeg" draggable="false"> <!--드래그, 이동 할 수 없음-->
+                </div>
+                <div class="slide-box">
+                    <img src="laptop (3).jpeg" draggable="false">
+                </div>
+                <div class="slide-box">
+                    <img src="laptop (4).jpeg" draggable="false">
+                </div>
+            </div>
+        </div>
+        <button class="before">이전</button>
+        <button class="slide-1">1</button>
+        <button class="slide-2">2</button>
+        <button class="slide-3">3</button>
+        <button class="next">다음</button>
+
+    <script>
+        var currentPic = 1;
+        var totalSlides = $('.slide-box').length;
+        
+        $('.before').on('click', function() {
+            if (currentPic > 1) {
+                currentPic--;
+                $('.slide-container').css('transform', `translateX(-${(currentPic - 1)}00vw)`);
+            }
+        });
+
+        $('.next').on('click', function() {
+            if (currentPic < totalSlides) {
+                $('.slide-container').css('transform', `translateX(-${currentPic * 100}vw)`);
+                currentPic++;
+            }
+        });
+
+        $('.slide-2').on('click', function(){
+            currentPic = 2;
+            $('.slide-container').css('transform', 'translateX(-100vw)');
+        });
+        $('.slide-3').on('click', function(){
+            currentPic = 3;
+            $('.slide-container').css('transform', 'translateX(-200vw)');
+        });
+        $('.slide-1').on('click', function(){
+            currentPic = 1;
+            $('.slide-container').css('transform', 'translateX(0vw)');
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            let startX = 0;
+            let down = false;
+            let currentSlide = 0;
+
+            $('.slide-box').on('mousedown',function(e){
+                startX = e.clientX;
+                down = true;
+            });
+
+            $(document).on('mousemove', function(e){
+                if(!down) return;
+                
+                let moveX = e.clientX - startX;
+                let newTranslateX = (currentSlide * -100) + (moveX / totalSlides); //현재 활성화된 슬라이드의 인덱스에 -100을 곱하고 moveX를 조정해 새로운 translateX 값을 계산
+            
+                // 현재 슬라이드가 첫 번째 슬라이드이고, 왼쪽으로 이동하려는 경우
+                if (currentSlide === 0 && moveX > 0) {
+                    newTranslateX = 0; // 왼쪽으로 추가 이동을 하지 않음
+                }
+                // 현재 슬라이드가 마지막 슬라이드이고, 오른쪽으로 이동하려는 경우
+                else if (currentSlide === totalSlides - 1 && moveX < 0) {
+                    newTranslateX = -(currentSlide * 100); // 오른쪽으로 추가 이동을 하지 않음
+                }
+                else {
+                    $('.slide-container').css('transform', `translateX(${newTranslateX}vw)`);
+                }
+            });
+
+            $(document).on('mouseup', function(e){
+                if (!down) return;
+                down = false;
+
+                let moveX = e.clientX - startX;
+                if (Math.abs(moveX) > 200){
+                    if(moveX < 0 && currentSlide < totalSlides-1){
+                        currentSlide++;
+                    } else if (moveX > 0 && currentSlide > 0){
+                        currentSlide--;
+                    }
+                }
+                var newTranslateX = currentSlide * -100;
+        
+                $('.slide-container').css('transition', 'all 0.5s');
+                $('.slide-container').css('transform', `translateX(${newTranslateX}vw)`);
+                
+                setTimeout(function(){
+                    $('.slide-container').css('transition', 'none')
+                }, 500);
+            });
+
+        });
+    </script>
+            
+    <script>       
+            // 모바일 기기 touchstart, touchmove, touchend
+        $('.slide-box').eq(0).on('touchstart', function(e){ // 터치 했을 때
+            startX = e.touches[0].clientX; // 터치이벤트 시 X좌표
+            down = true;
+        })
+
+        $('.slide-box').eq(0).on('touchmove', function(e){ // 스와이프할 때
+            //console.log(e.clientX)
+            if(down == true){
+                $('.slide-container').css('transform', `translateX(${e.touches[0].clientX -startX}px`) // 우측으로 드래그한 거리만큼  이동
+            }
+        })
+
+        $('.slide-box').eq(0).on('touchend', function(e){ // 터치 종료
+           down = false;
+           if (e.changedTouches[0].clientX -startX < -300){ // changedTouches[0].clientX
+                $('.slide-container').css('transition', 'all 0.5s').css('transform', 'translateX(-100vw)');
+           }else {
+                $('.slide-container').css('transition', 'all 0.5s').css('transform', 'translateX(0vw)');
+           }
+           setTimeout(()=>{ // 이동이 끝났을 때 트랜지션 제거
+                $('.slide-container').css('transition', 'none')
+           }, 500);
+        });
+        
+    </script>
+</body>
+</html>

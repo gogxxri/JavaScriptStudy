@@ -1,4 +1,48 @@
-<div>장바구니 페이지</div>
-<p>상품명1</p>
-<p>상품명2</p>
-<p>상품명3</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div>장바구니 페이지</div>
+    <div id="cartItems">
+        <!-- 장바구니 상품 목록 -->
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+            function displayCartItems(){
+                var cartContainer = $('#cartItems');
+                cartContainer.empty(); // 기존 내용 초기화
+
+                if(cartItems.length > 0){
+                    cartItems.forEach((item, idx) => {
+                          var itemHTML = `
+                            <div class="cart-item">
+                                <p>${item.title}</p>
+                                <p>${item.cnt} 개</p>
+                                <button class="remove-item" data-idx="${idx}">삭제</button>
+                            </div>`;
+                            cartContainer.append(itemHTML);
+                    });
+                    $('.remove-item').click(()=>{
+                        var removeItem = $(this).data('idx');
+                        cartItems.splice(removeItem, 1);
+                        localStorage.setItem('cart', JSON.stringify(cartItems));
+                        displayCartItems();
+                    });    
+                } else {
+                   cartContainer.html(`<p>장바구니가 비어있습니다.</p>`)
+                }
+            }
+            displayCartItems();
+        });
+    </script>
+    
+</body>
+</html>

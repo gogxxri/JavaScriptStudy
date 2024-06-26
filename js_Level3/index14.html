@@ -71,10 +71,16 @@
         2. 지금 누른 버튼 윗윗 글자 가져와서
         3. localStorage에 글자 저장
         */
-        $('.buy').click(function(e){
-           var title = $(e.target).siblings('h5').text(); // 타겟의 형제 중 h5의 텍스트
-           console.log(title)
-           localStorage.setItem('cart',  JSON.stringify([title]))
+        $(document).on('click', '.buy', function(e){
+            var title = $(e.target).siblings('h5').text(); // 타겟의 형제 중 h5의 텍스트
+            var cart = JSON.parse(localStorage.getItem('cart')) || []; // 없으면 빈 배열로 초기화
+            var itemIdx = cart.findIndex(item => item.title == title);
+            if (itemIdx == -1){
+                cart.push({title : title, cnt : 1});
+            } else {
+                cart[itemIdx].cnt++;
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
         });
 
         // 제품 표시
