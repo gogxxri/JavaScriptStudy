@@ -5,6 +5,7 @@ import data from './data';
 import Detail from './pages/Detail';
 import ShoesCard from './ShoesCard';
 import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom';
+import axios from 'axios';
 
 function App() {
 
@@ -35,6 +36,13 @@ function App() {
             ))}
           </div>
         </div>
+          <button onClick={()=>{
+            axios.get('https://codingapple1.github.io/shop/data2.json')
+            .then((data)=>{
+              console.log(data.data)
+            })
+            .catch(()=>{console.log("get요청 실패")})
+        }}>더보기</button>
         </>
       }/>
         <Route path="/detail/:id" element={<Detail shoes={shoes}/>}/>
