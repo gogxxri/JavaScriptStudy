@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { json, Link, useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import { plusCart } from "../store";
 import { Context1 } from './../App';
@@ -44,6 +44,22 @@ function Detail(props) {
             return () => clearTimeout(b);
         }
     }, [count]);
+
+    useEffect(()=>{
+        console.log(findItem.id);
+        let getWatched = JSON.parse(localStorage.getItem('watched'));
+
+        if (getWatched == null ) {
+            getWatched = [];
+        } else {
+            getWatched.push(findItem.id)
+        }
+
+
+        getWatched = new Set(getWatched)
+        getWatched = Array.from(getWatched)
+        localStorage.setItem('watched', JSON.stringify(getWatched));
+    }, [findItem]);
 
     return (
         <div className={'container start ' + fade2}>

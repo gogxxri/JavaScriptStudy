@@ -1,6 +1,6 @@
 import './App.css';
 import { Container, Nav, Navbar, Spinner } from 'react-bootstrap';
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import data from './data';
 import Detail from './pages/Detail';
 import Cart from './pages/Cart';
@@ -16,14 +16,21 @@ function App() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [stock, setStock] = useState([10, 11, 12]);
+  const [showWatched, setShowWatched] = useState(false);
+
+  useEffect(() => {
+    if (!localStorage.getItem('watched')) {
+      localStorage.setItem('watched', JSON.stringify([]));
+    }
+  }, []);
 
   const more = () => {
     if (count === 0) {
       setLoading(true);
       axios.get('https://codingapple1.github.io/shop/data2.json')
         .then(data => {
-          let copy = [...shoes, ...data.data]
-          setShoes(copy)
+          let copy = [...shoes, ...data.data];
+          setShoes(copy);
           setCount(1);
           setLoading(false);
         })
@@ -35,8 +42,8 @@ function App() {
       setLoading(true);
       axios.get('https://codingapple1.github.io/shop/data3.json')
         .then(data => {
-          let copy = [...shoes, ...data.data]
-          setShoes(copy)
+          let copy = [...shoes, ...data.data];
+          setShoes(copy);
           setCount(2);
           setLoading(false);
         })
@@ -48,6 +55,23 @@ function App() {
       alert("더 이상 상품이 없습니다.");
     }
   };
+
+  function WatchedProduct() {
+    let watched = JSON.parse(localStorage.getItem('watched')) || [];
+    return (
+      <div style={{ display: 'flex', background: 'rgba(0, 0, 0, 0.3)' }}>
+        {watched.map((id, index) => {
+          let watcheditem = shoes.find(shoes => shoes.id == id);
+          return (
+            <div key={index} style={{ margin:'20px'}}>
+              <img src={`https://codingapple1.github.io/shop/shoes${id + 1}.jpg`} width="50px"/>
+              <div>{watcheditem.title}</div>
+            </div>
+          )
+         })}
+      </div>
+    );
+  }
 
   return (
     <div className="App">
@@ -65,6 +89,12 @@ function App() {
         <Route path="/" element={
           <>
             <div className="main-bg"></div>
+            <div className="watched-product">
+              <button onClick={() => {
+                setShowWatched(!showWatched);
+              }}>최근 본 상품</button>
+              {showWatched && <WatchedProduct />}
+            </div>
             <div className="container">
               <div className="row">
                 {shoes.map((shoe, i) => (
@@ -73,17 +103,17 @@ function App() {
               </div>
             </div>
             {loading && <Spinner animation="border" role="status">
-                <span className="visually-hidden">로딩 중...</span>
-              </Spinner>}
+              <span className="visually-hidden">로딩 중...</span>
+            </Spinner>}
             {count < 2 && <button onClick={more}>더보기</button>}
           </>
         } />
         <Route path="/detail/:id" element={
-          <Context1.Provider value={{stock}}>
+          <Context1.Provider value={{ stock }}>
             <Detail shoes={shoes} />
-            </Context1.Provider> 
-          }/>
-        <Route path="/cart" element={<Cart/>}/>
+          </Context1.Provider>
+        } />
+        <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<div>404</div>} />
       </Routes>
     </div>
