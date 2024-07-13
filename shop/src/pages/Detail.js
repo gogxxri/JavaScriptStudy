@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
-
-import {Context1} from './../App';
+import { plusCart } from "../store";
+import { Context1 } from './../App';
+import { useDispatch, useSelector } from "react-redux";
 
 function Detail(props) {
     let { id } = useParams();
@@ -12,24 +13,25 @@ function Detail(props) {
     let [tap, setTap] = useState(0);
     let [fade, setFade] = useState('')
     let [fade2, setFade2] = useState('');
+    let dispatch = useDispatch();
 
+    let { stock } = useContext(Context1);
+    let cartlist = useSelector((state) => state.cartlist);
 
-    let {stock} = useContext(Context1);
-
-    useEffect(()=>{
-        setFade2('end')
-        return ()=>{
-          setFade2('')
+    useEffect(() => {
+        setFade2('end');
+        return () => {
+            setFade2('');
         }
-    },[])
+    }, []);
 
-      useEffect(()=>{
-        let a = setTimeout(()=>{ setFade('end') }, 100)
-        return ()=>{
+    useEffect(() => {
+        let a = setTimeout(() => { setFade('end') }, 100);
+        return () => {
             clearTimeout(a);
-            setFade('')
+            setFade('');
         }
-    }, [tap])
+    }, [tap]);
 
     useEffect(() => {
         let a = setTimeout(() => { setAlert2(false) }, 2000);
@@ -55,7 +57,11 @@ function Detail(props) {
                     <h4 className="pt-5">{findItem.title}</h4>
                     <p>{findItem.content}</p>
                     <p>{findItem.price}</p>
-                    <button className="btn btn-danger">주문하기</button>
+                    <button className="btn btn-danger" onClick={() => {
+                        dispatch(plusCart({ id: findItem.id, name: findItem.title, count: 1 }));
+                        console.log(cartlist);
+                    }}>주문하기</button>
+                    <button><Link to="/cart">장바구니 페이지로</Link></button>
                 </div>
                 <Nav variant="tabs" defaultActiveKey="link0">
                     <Nav.Item>
@@ -68,19 +74,18 @@ function Detail(props) {
                         <Nav.Link eventKey="link2" onClick={() => { setTap(2) }}>버튼2</Nav.Link>
                     </Nav.Item>
                 </Nav>
-                <TabContent tap={tap} />
+                <TabContent tap={tap} stock={stock} fade={fade} />
             </div>
         </div>
     );
 
-    function TabContent({tap}){
-      
+    function TabContent({ tap, stock, fade }) {
         return (
-          <div className={'start ' + fade}>
-            { [<div>{stock[0]}</div>, <div>{stock[1]}</div>, <div>{stock[2]}</div>][tap] }
-          </div>
+            <div className={'start ' + fade}>
+                {[<div>{stock[0]}</div>, <div>{stock[1]}</div>, <div>{stock[2]}</div>][tap]}
+            </div>
         )
-      }
+    }
 }
 
 export default Detail;

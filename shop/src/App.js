@@ -3,6 +3,7 @@ import { Container, Nav, Navbar, Spinner } from 'react-bootstrap';
 import { createContext, useState } from "react";
 import data from './data';
 import Detail from './pages/Detail';
+import Cart from './pages/Cart';
 import ShoesCard from './ShoesCard';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -82,6 +83,7 @@ function App() {
             <Detail shoes={shoes} />
             </Context1.Provider> 
           }/>
+        <Route path="/cart" element={<Cart/>}/>
         <Route path="*" element={<div>404</div>} />
       </Routes>
     </div>
