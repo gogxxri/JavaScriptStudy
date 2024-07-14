@@ -7,6 +7,7 @@ import Cart from './pages/Cart';
 import ShoesCard from './ShoesCard';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useQuery } from 'react-query';
 
 export let Context1 = createContext();
 
@@ -23,6 +24,16 @@ function App() {
       localStorage.setItem('watched', JSON.stringify([]));
     }
   }, []);
+
+  let result = useQuery('username', ()=>{
+    return axios.get('https://codingapple1.github.io/userdata.json')
+    .then((data)=>{
+      console.log('다른 페이지 갔다가 옮기면 자동으로 데이터 가져옴 refetch')
+      return data.data
+    }),
+    {stateTime : 8000}
+  })
+
 
   const more = () => {
     if (count === 0) {
@@ -81,6 +92,11 @@ function App() {
           <Nav className="me-auto">
             <Nav.Link onClick={() => navigate('/')}>Home</Nav.Link>
             <Nav.Link onClick={() => navigate('/detail')}>Detail</Nav.Link>
+          </Nav>
+          <Nav className="ms-auto" style={{color:'white'}}>
+              {result.isLoading && '로딩중'}
+              {result.error && '에러발생'}
+              {result.data && 'Hello ' + result.data.name}
           </Nav>
         </Container>
       </Navbar>
