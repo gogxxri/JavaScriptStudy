@@ -1,15 +1,20 @@
 import './App.css';
 import { Container, Nav, Navbar, Spinner } from 'react-bootstrap';
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, lazy, Suspense } from "react";
 import data from './data';
-import Detail from './pages/Detail';
-import Cart from './pages/Cart';
+//import Detail from './pages/Detail';
+//import Cart from './pages/Cart';
 import ShoesCard from './ShoesCard';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 
 export let Context1 = createContext();
+
+//lazy import : 늦게 랜더링 되도록, 컴포넌트 로딩 발생 / lazy, Suspense 임포트)
+const Detail = lazy(()=> import('./pages/Detail'));
+const Cart = lazy(()=> import('./pages/Cart'));
+
 
 function App() {
   const [shoes, setShoes] = useState(data);
@@ -125,9 +130,11 @@ function App() {
           </>
         } />
         <Route path="/detail/:id" element={
-          <Context1.Provider value={{ stock }}>
-            <Detail shoes={shoes} />
-          </Context1.Provider>
+          <Suspense fallback={<div>로드중</div>}>
+            <Context1.Provider value={{ stock }}>
+              <Detail shoes={shoes} />
+            </Context1.Provider>
+          </Suspense>
         } />
         <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<div>404</div>} />

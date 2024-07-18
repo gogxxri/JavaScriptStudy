@@ -1,17 +1,29 @@
+import {memo, useState} from "react"
 import {Table} from 'react-bootstrap';
 import {useDispatch, useSelector} from "react-redux";
 import {changeAge} from './../store/userSlice.js';
 import {changeCnt, deleteCart} from '../store.js';
 
+
+let Child = memo(function(){
+    console.log('재랜더링')
+    return <div>자식컴포넌트</div>
+})
+
 function Cart(){
 
     let state = useSelector((state) => state);
     console.log(state);
+    let [cnt,setCnt] = useState(0)
 
     let dispatch = useDispatch();
 
     return (
         <div>
+            <Child cnt={cnt}/>
+            <button onClick={()=>{setCnt(cnt+1)}}>+</button>
+            <p>{cnt}</p>
+
             {state.user.name} {state.user.age}의 장바구니
             <button onClick={()=>{
                 dispatch(changeAge(5))
