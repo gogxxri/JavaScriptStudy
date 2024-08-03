@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This</title>
+</head>
+<body>
+    <script>
+        //'use strict'; // 자바스크립트를 엄격하게 쓸 수 있도록 함
+         //x = 300; // use strict 없으면 출력 되는데 use strict 쓰면 ReferenceError
+        // console.log(x);
+
+        console.log(this) // {window}
+
+        // this
+        function thiss() {
+            console.log(this); // {window}
+        }
+        thiss();
+
+        // 오브젝트 자료형에 함수 넣을 수 있음
+        let obj = {
+            data : 'kim',
+            hello : function(){
+                console.log('안녕');
+            }
+        }
+        obj.hello();
+
+
+        let obj2 = {
+            data : 'kim',
+            this2 : function(){
+                console.log(this); // 나를 포함하고 있는 오브젝트
+            }
+        }
+        obj2.this2();
+
+        let obj3 = {
+            data : {
+                name : 'park',
+                this3 : function(){
+                    console.log(this); 
+                }
+            }
+        }
+        obj3.data.this3();
+
+        let obj4 = {
+            data : {
+                name : 'hong',
+                this4 : () => {
+                    console.log(this);
+                }
+            }
+        }
+        obj4.data.this4();
+    </script>
+    
+</body>
+</html>

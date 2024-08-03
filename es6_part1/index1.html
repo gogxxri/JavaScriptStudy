@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id = "hello">안녕</p>
+    <button id = "button">버튼</button>
+
+    <script>
+        document.getElementById('button').addEventListener('click', function(){
+            merong('인사 잘~한다')
+        })
+
+        function merong(A){
+            document.getElementById('hello').innerHTML = A;
+        }
+
+        let name = ['kim', 20] // array
+        console.log(name[1]);
+        let loc = {location : 'seoul', age : 20 } // object
+        console.log(loc.age);
+        console.log(loc['age']);
+
+        if (1 === 1 || 1 === 2) {
+            document.body.innerHTML += '<div>ㅋㅋ</div>';
+        } else {
+            console.log('ㅎㅎㅎ');
+        }
+
+        [1, 2, 3, 4].forEach(function(a, idx){
+            console.log(a, idx);
+        })
+
+    </script>
+</body>
+</html>

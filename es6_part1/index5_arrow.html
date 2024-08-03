@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow</title>
+</head>
+<body>
+
+    <button id="btn">btn</button>
+
+    <script>
+
+        // 1-1번
+        let person = {
+            name : '홍길동',
+            sayHi : function () {
+                return console.log(`안녕 나는 ${this.name}`)
+            }
+        }
+        person.sayHi(); 
+
+        // 1-2번
+        let person2 = {
+            name : "김유신",
+            sayHello : () => {
+                console.log(`안녕 나는 ${person2.name}`)
+            }
+        }
+        person2.sayHello();
+
+        // 2번
+        let data = {
+            basedata : [1, 2, 3, 4, 5],
+            allPlus : function(){
+                let sum = 0;
+                this.basedata.forEach(function(item){
+                sum += item;
+                })
+                return console.log(sum);
+            }
+        }
+        data.allPlus();
+
+        // 2-2
+        let data2 = {
+            baseData : [1, 2,, 3, 4, 5],
+            PlusAll : () => {
+                let sum = 0;
+                data2.baseData.forEach((a)=>{
+                    sum += a
+                })
+                return console.log(sum);
+            }
+        }
+        data2.PlusAll();
+
+        // 3번
+        setTimeout(function(){
+            console.log('안녕');
+        }, 5000);
+
+        function say(){
+            console.log('hello')
+        }
+        setTimeout(say(), 1000);
+
+
+        // 4번
+        let print = () => {
+            document.getElementById('btn').addEventListener('click', function(){
+            console.log(this.innerHTML)
+        });
+
+        }
+         setTimeout(print(), 1000);
+    </script>
+</body>
+</html>

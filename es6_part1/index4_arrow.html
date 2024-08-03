@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow</title>
+</head>
+<body>
+
+    <button id="btn">button</button>
+    <script>
+    let func = (a) => {
+        return a+10;
+    }
+    console.log(func(5));
+
+    let func2 = a => a-1
+    console.log(func2(1));
+
+    [1, 2, 3, 4].forEach(function(item){
+        console.log(item);
+    });
+
+    [1, 2, 3, 4].forEach(it => console.log(it));
+
+    document.getElementById('btn').addEventListener('click', (e) => {
+        this; // window 출력됨 대신 e.currentTarget 사용
+    })
+
+    let obj = {
+        fu : (a)=>{
+            a+3
+        }
+    }
+    console.log(obj.fu(1))
+
+    let obj2 = {
+        fu : ()=>{
+            return this
+        }
+    }
+    console.log(obj.fu())
+
+    var obj3 = {
+        fu : () => { console.log(this) }
+        }
+
+    obj3.fu(1)
+
+    </script>
+</body>
+</html>

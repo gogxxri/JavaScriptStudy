@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button id="btn">button</button>
+    <script>
+
+        /*
+        function hello(){
+            this.name = 'kim';
+        }
+
+        let obj = new hello()
+        console.log(obj);
+        */
+       
+        document.getElementById('btn').addEventListener('click', function(e){
+            this; // e.currentTarget        
+            // console.log(this)
+            // console.log(e.currentTarget);
+
+            let arr = [1, 2, 3];
+            arr.forEach(function(item){
+                console.log(item)
+            });
+
+            arr.forEach(function(a){
+                console.log(this); // window
+            })
+            let obj2 = {
+            names : ['kim', 'lee', 'hong'],
+            fucn : function(){
+                console.log(this); // object 출력
+                obj2.names.forEach(function(){
+                    console.log(this); // window
+                })
+            }
+        }
+
+        let obj3 = {
+            names : ['kim', 'lee', 'hong'],
+            fucn : function(){
+                console.log(this);
+                obj2.names.forEach(()=>{ // arrow function : 내부 this 값 변화시키지 않음
+                    console.log(this); // 상위 코드에 있는 this 즉. object
+                })
+            }
+        }
+        });
+
+    </script>
+</body>
+</html>
