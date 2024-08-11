@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template literals</title>
+</head>
+<body>
+    <script>
+        var hello = "안녕하세요 저는 ";
+        var name = "홍길동";
+        console.log(hello + name + "입니다");
+
+
+        var hello = `안녕하세요
+        저는 `;
+        var name = `홍길동`;
+        var age = `20`
+        console.log(`${hello}
+        바로바로 
+        
+        
+        ${name}입니다`);
+
+
+        var template = `<div>${name}</div>`;
+        document.body.innerHTML += template;
+
+        // tagged literals 
+        var welcome = `반갑습니다 ${name}님!`
+        function func(){
+            return 10
+        }
+        console.log(func(`반갑습니다 ${name}님!`)) // >> 10 출력
+
+        // 해체분석
+        function 해체분석(letters, variable1, variable2){
+            console.log(letters);
+            console.log(variable1 + variable2 + letters[2] + letters[1] + letters[0]);
+            console.log(variable1);
+            console.log(variable2);
+        }
+        해체분석`반갑습니다 ${name}${age}님!` 
+        // 첫번째 파라미터는 ${}양 옆 문자들을 array화 함 >> 반갑습니다 / 님!
+        // 두번째 파라미터는 변수를 담아줌
+        // 변수가 여러개이면 파라미터 추가하면 됨
+
+        
+    </script>
+</body>
+</html>

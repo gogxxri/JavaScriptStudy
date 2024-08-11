@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spread Operator</title>
+</head>
+<body>
+    <script>
+        // Spread Operator
+        // 1. array에 붙이면 대괄호 제거
+        var arr = ['hello', 'world']
+        console.log(arr);
+        console.log(...arr);
+
+        // 2. 문자에 붙이면
+        var string = 'hello'
+        console.log(string);
+        console.log(...string);
+        console.log('h','e','l','l','o');
+        console.log(string[0]); // h
+        console.log(...string[2]); // l
+
+
+        //등호로 복사 같은 값을 공유함
+        var arr1 = [1, 2, 3];
+        var arr2 = arr1;
+        console.log(arr1);
+        console.log(arr2);
+
+        arr1[3] = 4;
+        console.log(arr1);
+        console.log(arr2); // [1, 2, 3, 4] // 등호로 복사하면 arr2도 arr1과 값을 공유
+
+        // 독립적인 값을 갖도록 복사하려면? // Deep Copy
+        var arr3 = [1, 2, 3];
+        var arr4 = [...arr3];
+
+        arr3[3] = 4;
+        console.log(arr3);
+        console.log(arr4);
+
+        // object 합치기
+        var obj1 = {a : 1, b : 2};
+        var obj2 = obj1
+
+        console.log(obj1);
+        console.log(obj2);
+
+        obj1.a = 8;
+        console.log(obj1);
+        console.log(obj2);
+
+        // object deep copy
+        var obj3 = {a : 1, b : 2};
+        var obj4 = {...obj3, c : 3};
+
+        console.log(obj3);
+        console.log(obj4);
+
+        obj3.a = 8;
+        console.log(obj3);
+        console.log(obj4);
+
+        // 값 중복
+        var obj5 = {a : 1, b : 2};
+        var obj6 = {a : 100, ...obj5};
+        var obj7 = {...obj5, a : 100};
+
+        console.log(obj6); // 가장 뒤에 있는 것을 적용
+        console.log(obj7); 
+
+
+        var arr = [1,2,3];
+        var brr = [4,5];
+        var crr = [...arr, ...brr];
+        console.log(crr);
+    </script>
+</body>
+</html>

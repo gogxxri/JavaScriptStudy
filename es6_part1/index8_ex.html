@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex</title>
+</head>
+<body>
+    
+    <script>
+        // 1번
+        /*
+        aa(); 
+        function aa(){
+            console.log(안녕);  // error : let, const는 호이스팅 시 undefined 자동으로 할당 안 됨
+            let 안녕 = 'hello'
+        }
+        */
+        aa(); 
+        function aa(){
+            console.log(안녕);  // undefined : var는 undefined 자동 할당
+            var 안녕 = 'hello'
+        }
+
+        // 2번
+        /*
+        b(); 
+        var b = function(){ //b is not a function : 선언부만 호이스팅 되기 때문에
+            console.log(안녕);
+            let 안녕 = "hello";
+        }
+        */
+    
+
+        // 3번
+        let a = 1;
+        var func = function(){
+            a = 2;
+            console.log(a)
+        }
+        console.log(a); // 1 :함수를 실행하지 않았기 때문
+        func(); // 2 : 함수를 실행
+
+        // 4번
+        let a4 = 1;
+        var b4 = 2;
+        window.a4 = 3; 
+        window.b4 = 4; // 재선언, 재할당
+        console.log(a4+b4); // 1 (가까운 변수값 사용)+ 4 = 5 
+
+        // 5번
+        for (var i = 1; i<=5; i++){
+            setTimeout(function(){
+                console.log(i) // 반복문이 도는 것과 동시에 실행되는 코드가 아님
+            }, 1000*i); 
+        } // 반복문이 다 돈 후 전역변수 var i는 5로 남아있음
+        // => var는 함수 스코프를 가지고 있어 반복문이 다 돈 후 i를 찾는데 5가 되어있음
+
+        for (let i = 1; i<=5; i++){
+            setTimeout(function(){
+                console.log(i)
+            }, 1000*i);
+        } // let의 범위는 {} 이기 때문에 반복문 안에 let i =0라는 참조가능한 변수가 선언됨
+
+    </script>
+
+    <div style="display : none">모달0</div>
+    <div style="display : none">모달1</div>
+    <div style="display : none">모달2</div>
+
+    <button>버튼0</button>
+    <button>버튼1</button>
+    <button>버튼2</button>
+
+    <script>
+        var buttons = document.querySelectorAll('button');
+        var modals = document.querySelectorAll('div');
+
+        for(let i=0; i<3; i++){
+            buttons[i].addEventListener('click', function(){
+                modals.forEach(function(modal){
+                modal.style.display="none";
+                });
+                modals[i].style.display="block";
+            })
+        }
+    </script>
+    
+</body>
+</html>

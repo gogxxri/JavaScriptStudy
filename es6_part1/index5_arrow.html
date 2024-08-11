@@ -69,11 +69,10 @@
         // 4번
         let print = () => {
             document.getElementById('btn').addEventListener('click', function(){
-            console.log(this.innerHTML)
+            setTimeout(()=>{console.log(this.innerHTML)}, 3000)
         });
 
-        }
-         setTimeout(print(), 1000);
+    }
     </script>
 </body>
 </html>

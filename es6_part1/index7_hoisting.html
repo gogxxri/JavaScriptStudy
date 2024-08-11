@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hoisting</title>
+    </head>
+    <body>
+        <script>
+            console.log(age); // undefined (선언이 되어있으나 값이 할당되지 않음)
+
+            var age = 30;
+
+            console.log(age); // 30
+
+
+            // 전역변수 : 모든 곳에서 쓸 수 있는 변수
+            function person(){
+                console.log(age); // 바깥은 변수는 안에서 사용 가능
+            }
+            person();
+
+            // window로 전역변수 만들기 (권장)
+            window.addr = "서울";
+            console.log(addr);
+            console.log(window.addr);
+
+            // 예제
+            if(true){
+                let a = 1;
+                var b = 2;
+                if(true){
+                    let b = 3; 
+                    console.log(b); // 3 : let 범위가 중괄호
+                }
+                console.log(b); // 2 
+            }
+            
+
+        </script>
+        
+    </body>
+</html>

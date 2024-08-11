@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="kr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>var let const</title>
+    </head>
+    <body>
+        <script>
+
+            // var : 재선언 o, 재할당o, 범위: function
+            var  name = "kim";
+            var name = "ko"; // 재선언 o
+            name = "kang";  // 재할당 o
+            console.log(name);
+
+            function ediya(){ // 사용 범위가 function
+                var coffie = "americano";
+                coffie;
+            }
+            //console.log(coffie); // not defined
+
+
+            
+            // let : 재선언x, 재할당o, 범위 : {}
+            let age = 20;
+            // let 나이 = 30; 재선언 불가
+            age=30;
+            console.log(age);
+
+            if(true){ // 범위는 중괄호
+                let fruit = "apple";
+            }
+            // console.log(fruit);  not defined
+
+
+            // const: 재선언x, 재할당x, 범위{}
+            const addr = '서울';
+            // const addr =' 전주'; 재선언 불가
+            // addr = "광주"; 재할당 불가
+
+            if(true){ // 범위는 중괄호
+                const animal = "tiger";
+            }
+            // console.log(animal);  not defined
+
+
+            // object 값 변경
+            const person = {title : 'plus'}
+            person.title='minus' // 재할당이 아니라 값을 변경하는것 o
+            console.log(person);
+
+            // 변경 불가능한 오브젝트 만들때
+            const phone = {brand : "apple"};
+            Object.freeze(phone); // 오브젝트 내용 바꿀 수 없음
+            phone.brand = 'galaxy'
+            console.log(phone);
+        </script>
+    </body>
+</html>

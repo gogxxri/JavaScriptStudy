@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            var pants = 20;
+            var socks = 100;
+
+            function change(letters, v1, v2){
+                console.log(letters[0] + v2 + letters[1] + v1)
+                console.log(letters)
+            }
+            change`바지는${pants} 양말은${socks}`;
+
+            var socks = 100;
+            var pants = 0;
+            function change2(letters, v1, v2){
+                if(v1 == 0){
+                    console.log(letters[0]+" 품절" + letters[1] + v2);
+                }
+            }
+            change2`바지는${pants} 양말은${socks}`;
+
+        </script>
+    </body>
+</html>
