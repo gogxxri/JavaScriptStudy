@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 함수 업그레이드하기 (default parameter/arguments)</title>
+</head>
+<body>
+    <script>
+        function hap(a, b = 10){ // b자리에 아무것도 없으면 default : 10
+            console.log(a+b)
+        }
+        hap(1); // b파라미터가 10을 가져고 11 출력
+        hap(1, 2); // 3출력
+
+        function hap2(a, b = 100*a){ // default에 연산도 사용가능
+            console.log(a+b)
+        }
+        hap2(1); // 101출력
+
+
+
+        function re(){
+            return 500;
+        }
+        function hap3(a, b = re()){ // default에 함수도 사용가능
+            console.log(a+b)
+        }
+        hap3(1); // 501출력
+
+
+        // arguments
+        function func(a, b, c){ // 파라미터
+            console.log(a, b, c); //arguments
+            console.log(arguments); // 모든 파라미터를 arr로 김싸주는 변수
+            console.log(arguments[0]);
+            console.log(...arguments);
+        }
+        func(1, 2, 3);
+
+        function func2(a,b,c){
+            for(let i=0; i <arguments.length; i ++){
+                console.log(arguments[i]);
+            }
+        }
+        func2('김', '이', '박')
+
+    </script>
+</body>
+</html>

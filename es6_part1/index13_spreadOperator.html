@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sperd</title>
+</head>
+<body>
+    <script>
+        function hap(a, b, c){
+            console.log(a+b+c);
+        }
+        hap(1, 3, 5);
+
+        //spread Operator
+        var arr = [1, 3, 5]
+        hap(...arr);
+
+        //<apply -  js 내장 함수>
+        hap.apply(undefined, arr);
+
+        //apply 예제
+        var person = {
+            hello : function (){
+                console.log(this.name + ' 안녕');
+            }
+        }
+        person.hello();
+
+        var person2 = {
+            name : '홍길동'
+        }
+        console.log(person2.name);
+
+        person.hello.apply(person2); // person.hello를 person2를 적용
+
+        // 즉, 이것과 같아짐
+        var person2 = {
+            name : '홍길동',
+            hello : function (){
+                console.log(this.name + ' 안녕');
+            }
+        }
+
+        // < call >
+        person.hello.apply(person2, [1, 2])
+        person.hello.call(person2, 1,2) 
+
+
+    </script>
+</body>
+</html>
