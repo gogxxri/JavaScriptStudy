@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>RestParams</title>
+    </head>
+    <body>
+        <script>
+            // rest vs spread
+            // 함수의 파라미터 자리에 붙으면 rest
+            // 나머지는 spread
+            function func(a, b, c){
+                for(let i = 0; i < arguments.length; i++){
+                    console.log(arguments[i])
+                }
+            }
+            func(2, 3, 4)
+
+            console.log('-----------------')
+            function func2(...restParams){
+                console.log(restParams)
+                for(let i=0; i<restParams.length; i++){
+                    console.log(restParams[i])
+                }
+            }
+            func2(3, 4, 5)
+
+            console.log('-----------------')
+            function func3(a, b, ...restParams2){
+                console.log(restParams2)
+                for(let i=0; i<restParams2.length; i++){
+                    console.log(restParams2[i])
+                }
+            }
+            func3(1, 2, 3, 4, 5, 6, 7);
+
+            // rest 사용시 주의점 : rest파라미터는 항상 마지막에
+        </script>
+    </body>
+</html>
