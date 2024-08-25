@@ -45,6 +45,8 @@ function App() {
       }, ...posts];
       setPosts(updatePosts);
       setInputValue('');
+    } else {
+      alert("글 제목을 입력하세요");
     }
   };
 
