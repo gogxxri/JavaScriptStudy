@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /* var student1 = {
+            name : 'kim',
+            age : 15,
+        sayHi(){
+                console.log(`안녕하세요 ${this.name}입니다.`)
+            }
+        }
+        student1.sayHi(); */
+
+        // construct : object 생성자
+        function Student(name, age){ // 일반함수랑 다름을 표시하기 위해 대문자로
+            this.name = name;
+            this.age = age;
+            this.sayHi = function(){
+                console.log(`안녕하세요 ${this.name}입니다.`)
+            }
+        }
+        // this : 새로 생성되는 objct = 인스턴스
+
+        var student1 = new Student('kim', 15);
+        student1.sayHi();
+
+        var student2 = new Student('park', 20)
+        student2.sayHi();
+
+
+
+
+        // Q1
+        function Products(name, price){
+            this.name = name;
+            this.price = price;
+        }
+
+        let product1 = new Products('shirts', 50000)
+        console.log(product1);
+        let product2 = new Products('pants', 60000)
+        console.log(product2);
+
+        //Q2
+        function Productsss(name, price){
+            this.name = name;
+            this.price = price;
+            this.tax =  function(){
+                console.log(this.price*0.1);
+            }
+        }
+
+        let product3 = new Productsss('shirts', 50000)
+        product3.tax();
+        
+
+    </script>
+    
+</body>
+</html>

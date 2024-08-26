@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reference data type</title>
+</head>
+<body>
+    <script>
+        // Primitive data type : 변수에 값이 그대로 저장됨
+        var a = 'dddd';
+
+        // reference data type : reference(화살표)가 저장됨
+        // array, objcet는 변수에 값이 저장 안됨
+        var arr = [1, 2, 3]
+        var obj = {name : 'kim'}
+
+
+        // 예제
+        var name1 = '김'
+        var name2 = name1;
+        name1 = '박'
+        
+        console.log(name1); //박
+        console.log(name2); // 김
+
+
+        var name3 = {name : '김'}
+        console.log(name3.name); // 김
+
+        var name4 = name3;
+        name3.name='박'
+        console.log(name3.name); // 박
+        console.log(name4.name); // 박
+
+
+        var name5 = {name : '김'}
+        var name6 = {name : '김'}
+        console.log(name5 == name6) // false
+
+        var name7 = {name : '김'}
+        function change(obj){
+            obj.name = 'Park'
+        }
+        change(name7);
+        console.log(name7.name) // Park
+
+
+        var name8 = {name : '김'}
+        function chan(obj){
+            obj = {name : 'park'} // 새로운 변수를 만든 것임, 파라미터 변수 (var obj와 같은 것)
+            console.log(obj.name); // park
+        }
+        chan(name8)
+        console.log(name8.name); // 김
+    </script>
+</body>
+</html>
