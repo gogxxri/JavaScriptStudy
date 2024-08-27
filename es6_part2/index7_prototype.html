@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Student(name, age){
+            this.name = name;
+            this.age = age;
+            this.sayHi = function(){
+                console.log(`안녕하세요 ${this.gender} ${this.name}입니다.`)
+            }
+        }
+
+        Student.prototype.gender = '남자 '
+
+        var student1 = new Student('park', 15);
+        var student2 = new Student('kim', 13);
+
+        student1.sayHi();
+        student2.sayHi();
+
+
+        var arr = [1, 2, 3];
+        var arr = new Array(5, 2, 3); // 위의 것과 같음(실제 arr이 만들어지는 방식)
+        console.log(arr.sort())
+        arr.push(5)
+        console.log(arr)
+
+        var obj = {name : 'kim'};
+        var obj = new Object();
+    </script>
+</body>
+</html>
