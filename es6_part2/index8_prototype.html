@@ -7,7 +7,7 @@
 </head>
 <body>
     <script>
-        function Student(name, age){
+         function Student(name, age){
             this.name = name;
             this.age = age;
             this.sayHi = function(){
@@ -24,14 +24,24 @@
         student2.sayHi();
 
 
-        var arr = [1, 2, 3];
-        var arr = new Array(5, 2, 3); // 위의 것과 같음(실제 arr이 만들어지는 방식)
-        console.log(arr.sort())
-        arr.push(5)
-        console.log(arr)
 
-        var obj = {name : 'kim'};
-        var obj = new Object();
+        console.log(student1.__proto__) // 부모의 prototype 출력
+
+        var big = {name : 'kim'};
+        var small = {age : 15};
+
+        small.__proto__ = big// 자식이라는 obj의 프로토타입을 부모로 지정
+        console.log(small.name); // kim
+
+        function Person(){
+        this.name = 'Kim';
+        this.age = 15;
+        }
+        var stu1 = new Person();
+        console.log(stu1 .__proto__);
+        console.log(Person.prototype);
+
+        
     </script>
 </body>
 </html>
