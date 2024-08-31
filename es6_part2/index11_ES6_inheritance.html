@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6 상속기능 class</title>
+</head>
+<body>
+    <script>
+
+        // es6에서는 class를 사용함
+        class Parent {
+            constructor(name){
+                this.name = name;
+                this.sayHi = function(){
+                    return console.log('HI ' + this.name) // 함수 추가 방법 1 / 자식이 함수를 직접 가짐
+                }
+            }
+            sayHello(){
+                return console.log('HELLO '+this.name)  // 함수 추가 방법 2 / 부모.prototype에 추가됨
+                                                // 자식은 sayHello()라고 썼을 때 부모의 prototype에 있던 sayHello() 함수를 쓸 수 있음
+            }
+        }
+
+        var child = new Parent('kim');
+
+        child.sayHi();
+        child.sayHello();
+        child.__proto__.sayHello.call(child); // 첫 번째 인자로 컨텍스트 객체를 받아서, 해당 객체의 메소드를 호출
+
+        console.log(child); // 방법 2의 sayHello()는 자식 오브젝트에 출력 안됨
+        console.log(child.__proto__); // 부모.prototype이 출력
+        console.log(Object.getPrototypeOf(child)) // 소괄호에 담은 프로토타입 출력, 즉 부모의 프로토타입 출력
+
+        // 프로토타입 수정
+        Parent.prototype.sayBye = function(){
+            console.log('Bye' + this.name);
+        }
+        console.log(child)
+        console.log(child.__proto__);
+
+    </script>
+</body>
+</html>

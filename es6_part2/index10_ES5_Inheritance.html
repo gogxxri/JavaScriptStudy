@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES5방식 상속기능</title>
+</head>
+<body>
+    <script>
+        //Object.create(물려받을 부모obj);
+
+        var parent = {name : 'kim', age : 50};
+
+        var child = Object.create(parent); // 부모의 속성을 물려받아 사용가능
+        console.log(child)
+
+        child.age = 20;
+
+        var grandChild = Object.create(child);
+        console.log(grandChild);
+
+    </script>
+</body>
+</html>
