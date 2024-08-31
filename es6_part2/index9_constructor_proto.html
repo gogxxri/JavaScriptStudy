@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>constructor, prototype 연습문제</title>
+</head>
+<body>
+    <script>
+        // 0번
+        function Student (name, age) {
+            this.name = name,
+            this.age = age,
+            this.sayHi = function() {
+                console.log("안녕 나는 " + this.name + "이야")
+            } 
+        }
+
+        const student1 = new Student('kim', 20);
+        student1.sayHi()
+        const student2 = new Student('Park', 21);
+        student2.sayHi()
+        const student3 = new Student('Lee', 22);
+        student3.sayHi()
+
+        // 1번
+        function Parent(){
+            this.name='kim';
+        }
+
+        var a = new Parent();
+
+        a.__proto__.name='Park';
+        console.log(a.name); // kim
+        console.log(a.__proto__); // {name: 'Park'}
+
+
+        // 2번
+        function Person(name, age){
+            this.name = name;
+            this.age = age;
+        }
+
+        Person.prototype.sayHi1 = function(){
+            console.log("안녕" + this.name);
+        }
+
+        var person1 = new Person('kim', 20);
+
+        console.log(Person.prototype);
+        person1.sayHi1();
+
+        // 3번
+        Array.prototype.remove3 = function(){
+            for(var i = 0; i < this.length; i++){
+                if (this[i] === 3) {
+                    this.splice(i, 1);
+                }
+            }
+        }
+        var arr = [1,2,3,4,5];
+        arr.remove3();
+
+        console.log(arr);
+
+        // 3-1
+        Array.prototype.remove5 = function(){
+            return this.filter(item => {
+                return item !== 5;
+            })
+        }
+        var arr2 = [1, 2, 3, 4, 5, 6];
+        newarr2 = arr2.remove5(); // filter는 새로운 값을 반환하기 때문에 값을 담아야함
+        console.log(newarr2) 
+    </script>
+</body>
+</html>
