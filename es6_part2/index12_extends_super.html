@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class를 복사하는 extends / super</title>
+</head>
+<body>
+    <script>
+
+        class Grand {
+            constructor(lastName, name){
+                this.lastName = lastName;
+                this.name = name;
+            }
+            sayHi(){
+                console.log('hello grand'); // Grand.prototype에 추가, super없이 상속 가능
+            }
+        }
+
+        var grand1 = new Grand('kim', 'kil')
+        console.log( grand1)
+
+        class Parent extends Grand{
+            constructor(lastName, name, age){
+                super(lastName, name); 
+                this.age = age;
+            }
+            sayHi(){
+                console.log('hello parent')
+                super.sayHi();
+            }
+        }
+
+        var parent1 = new Parent('Park', 'Kil', 30);
+        console.log(parent1);   
+        console.log(parent1.sayHi()) // 가까운 프로토타입의 것 출력함
+
+
+        class child {
+
+        }
+    </script>
+</body>
+</html>
