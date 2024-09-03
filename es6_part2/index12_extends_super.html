@@ -28,13 +28,14 @@
             }
             sayHi(){
                 console.log('hello parent')
-                super.sayHi();
+                super.sayHi(); // constructor 바깥에서 super를 쓰면 부모 프로토타입을 의미함
+                                // 부모 프로토 타입의  sayHi 실행 (hello grand)
             }
         }
 
         var parent1 = new Parent('Park', 'Kil', 30);
         console.log(parent1);   
-        console.log(parent1.sayHi()) // 가까운 프로토타입의 것 출력함
+        console.log(parent1.sayHi()) // 가까운 프로토타입의 것 출력함 (hello parent)
 
 
         class child {

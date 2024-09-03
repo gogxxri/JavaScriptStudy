@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getter, setter</title>
+</head>
+<body>
+    <script>
+
+        let person = {
+            name : 'park',
+            age : 30,
+            nextAge(){
+                return this.age + 1
+            },
+            setAge(age){                    // 안전장치, 실수 방지, 관리 편의
+                this.age = parseInt(age);   // 문자를 정수로 변환 (데이터 수정전 미리 검사)
+            },
+        }
+
+        console.log(person.nextAge())
+        person.setAge('20');
+
+
+        // get / set
+        let person2 = {
+            name : 'park',
+            age : 50,
+            get nextAge(){
+                return this.age + 1 // getter는 return이 반드시 있어야 함 / 파라미터 없어야 함
+            },
+            set setAge(age){                      
+                this.age = parseInt(age);   // setter는 파라미터가 1개 있어야 함
+            },
+        }
+
+        console.log(person2.nextAge);
+        person2.setAge = '40';
+
+
+        // class에서
+        class Person {
+            constructor(name, age){
+                this.name = name;
+                this.age = age;
+            }
+            get nextAge(){
+                return this.age + 1
+            }
+            set setAge(age){
+                this.age = age;
+            }
+        }
+
+        let person3 = new Person('park', 100);
+        console.log(person3.nextAge) // get 사용시 () 생략 가능
+        console.log(person3.setAge=80);
+    </script>
+</body>
+</html>
