@@ -67,7 +67,36 @@
             console.log(you);
         }
         func2([1, 2]);
-a
+
+
+        var [number, address] = [ 30, 'seoul' ];
+        var {address : a , number = 20 } = { address, number };
+        console.log(address);
+        console.log(a);
+        console.log(number);
+
+        let info = {
+            body: {
+                height: 190,
+                weight: 70
+            },
+            size: ["상의 Large", "바지 30인치"],
+        };
+
+        let {
+            body: {
+                height, 
+                weight
+            },
+            size: [ 상의, 하의 ]
+        } = info;
+
+        console.log(info);
+        console.log(height);
+        console.log(weight);
+        console.log(상의);
+        console.log(하의);
+
     </script>
 </body>
 </html>
