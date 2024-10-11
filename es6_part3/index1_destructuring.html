@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        var arr = [2, 3, 4];
+
+        // var a = arr[0];
+        // var b = arr[1];
+
+        // var a, b, c = [2, 3, 4];
+
+        // 등호로 기본 값 지정 가능
+        var [a,b,c=10] = [2, 3]; 
+        
+        console.log(a); //2
+        console.log(b); // 3
+        console.log(c); // 10
+
+
+        // var obj = {name : 'kim', age: 30};
+        // var name = obj.name;
+        // var age = obj.age
+
+        var {name, age} = {name : 'kim', age : 30}
+        console.log(name);
+        console.log(age);
+        
+        /*기본값 지정*/
+        var {name2, age2=50} = {name2 : 'kim'}
+        console.log(name2);
+        console.log(age2);
+
+        /*변수명 바꾸기*/
+        var {name3 : 나이} = {name3 : 'kim'}
+        console.log(나이);
+
+        /*변수명 바꾸기 + 디폴트*/
+        var {name4 : 나이4 = 'PARK'} = {}
+        console.log(나이4);
+
+
+        var last = 'kim'; 
+        var year = 0;
+        var obj2 = {last : last, year : year}; 
+        var obj3 = {last, year} /*변수와 키값이 같을 때 생략 가능*/
+
+        console.log(obj2);
+        console.log(obj3);
+
+        var obj3 = {me : '나', you : '너'};
+
+        function func({me, you}){
+            console.log(me);
+            console.log(you);
+        }
+        func({me : '나', you : '너'});
+        func(obj3);
+
+        function func2( [me, you] ){
+            console.log(me);
+            console.log(you);
+        }
+        func2([1, 2]);
+a
+    </script>
+</body>
+</html>
